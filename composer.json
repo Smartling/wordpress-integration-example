@@ -1,0 +1,17 @@
+{
+  "name" :        "Smartling Wordpress connector extender",
+  "description" : "",
+  "type" :        "wordpress-plugin",
+  "require" :     {
+    "php" : ">=5.5"
+  },
+  "config" :      {
+    "vendor-dir" : "src/third-party"
+  },
+  "autoload" :    {
+    "psr-4" : {
+      "Smartling\\Extension\\" :    "src/extension",
+      "Smartling\\Declarations\\" : "src/Declarations"
+    }
+  }
+}
