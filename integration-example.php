@@ -1,13 +1,20 @@
 <?php
 /**
- * Plugin Name: Smartling and Customizations
- * Plugin Description: Shows how to translate custom content types
- * Plugin URI: http://smartling.com
- * Author: smartling
- * ConnectorRequiredMin: 4.1
- * Version: 0.2
- */
-
+  * @link              https://www.smartling.com
+  * @since             1.0.0
+  * @package           smartling-integration-example
+  * @wordpress-plugin
+  * Plugin Name:       Smartling and Customizations
+  * Description:       Shows how to translate custom content types
+  * Author:            smartling
+  * Author URI:        https://www.smartling.com
+  * Plugin URI:        https://www.smartling.com/translation-software/wordpress-translation-plugin/
+  * License:           GPL-3.0+
+  * Network:           true
+  * License URI:       http://www.gnu.org/licenses/gpl-3.0.txt
+  * ConnectorRequiredMin: 4.1
+  * Version: 1.1
+*/
 
 /**
  * Autoloader starts always
@@ -29,17 +36,12 @@ require_once __DIR__ . "/src/Declarations/custom-content-types-registrations.php
 if (is_admin()){
     add_action('plugins_loaded', function () {
         add_action('smartling_before_init', function (\Symfony\Component\DependencyInjection\ContainerBuilder $di) {
-
             add_action('init', function () use ($di) {
-
                 \Smartling\Declarations\CustomTaxonomies::register();
                 \Smartling\Declarations\CustomPostTypes::register();
 
                 \Smartling\Bootloader::boot(__FILE__,$di);
             });
-
-
-
         });
     });
 }
