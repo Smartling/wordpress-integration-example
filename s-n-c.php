@@ -8,25 +8,18 @@
  * Version: 0.2
  */
 
-
-/**
- * Autoloader starts always
- */
-if (!class_exists('\Smartling\Bootloader')) {
-    require_once plugin_dir_path(__FILE__) . 'src/Bootloader.php';
-    \Smartling\Bootloader::initAutoloader(__FILE__);
-}
-
 /**
  * Always declaring custom types
  */
 require_once __DIR__ . "/src/Declarations/custom-content-types-registrations.php";
 
+if (is_admin() || (defined('DOING_CRON') && true === DOING_CRON)) {
 
-/**
- * Execute ONLY for admin pages
- */
-if (is_admin()){
+    if (!class_exists('\Smartling\Bootloader')) {
+        require_once plugin_dir_path(__FILE__) . 'src/Bootloader.php';
+        \Smartling\Bootloader::initAutoloader(__FILE__);
+    }
+
     add_action('plugins_loaded', function () {
         add_action('smartling_before_init', function (\Symfony\Component\DependencyInjection\ContainerBuilder $di) {
 
@@ -34,12 +27,16 @@ if (is_admin()){
 
                 \Smartling\Declarations\CustomTaxonomies::register();
                 \Smartling\Declarations\CustomPostTypes::register();
+                \Smartling\Declarations\FieldFilters::register();
 
-                \Smartling\Bootloader::boot(__FILE__,$di);
+                \Smartling\Bootloader::boot(__FILE__, $di);
             });
 
 
-
         });
+
+        \Smartling\Extension\ShortcodeInjector::addShortcode('vc_row');
+        \Smartling\Extension\ShortcodeInjector::inject();
+
     });
 }
