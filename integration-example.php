@@ -38,17 +38,27 @@ if (is_admin() || (defined('DOING_CRON') && true === DOING_CRON)) {
 
     add_action('plugins_loaded', function () {
         add_action('smartling_before_init', function (\Symfony\Component\DependencyInjection\ContainerBuilder $di) {
+
+            /**
+             * Content-types registration should be done in 'init' handler
+             */
             add_action('init', function () use ($di) {
                 \Smartling\Declarations\CustomTaxonomies::register();
                 \Smartling\Declarations\CustomPostTypes::register();
-                \Smartling\Declarations\FieldFilters::register();
 
-                \Smartling\Bootloader::boot(__FILE__, $di);
             });
 
+
+            \Smartling\Bootloader::boot(__FILE__, $di);
+
+
+            /**
+             * Some shortcodes are not registered while smartling-connector is executing. So
+             */
             \Smartling\Extension\ShortcodeInjector::addShortcode('vc_row');
             \Smartling\Extension\ShortcodeInjector::inject();
 
+            \Smartling\Declarations\FieldFilters::register();
         });
     });
 }

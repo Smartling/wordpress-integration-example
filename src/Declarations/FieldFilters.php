@@ -19,6 +19,7 @@ class FieldFilters
     public function registerFieldFilters($definitions)
     {
         $example = [
+            /*
             [
                 'pattern' => 'id',
                 'action'  => 'skip',
@@ -26,18 +27,17 @@ class FieldFilters
             [
                 'pattern' => 'phone',
                 'action'  => 'copy',
-            ],
-            [
-                'pattern'       => 'page_id', //page_id='1,3,5,7'
+            ],[
+                'pattern'       => 'post_parent',
                 'action'        => 'localize',
-                'serialization' => 'coma-delimited',
+                'serialization' => 'none',
                 'value'         => 'reference',
                 'type'          => 'post',
             ],
             [
-                'pattern'       => 'images', //images='1,3,5,7'
+                'pattern'       => '_thumbnail_id',
                 'action'        => 'localize',
-                'serialization' => 'coma-delimited',
+                'serialization' => 'none',
                 'value'         => 'reference',
                 'type'          => 'media',
             ],
@@ -48,6 +48,7 @@ class FieldFilters
                 'value'         => 'raw',
                 'type'          => 'media',
             ],
+            */
         ];
 
 
@@ -68,19 +69,19 @@ class FieldFilters
                                          // * "delimited" - value should be converted to array. An example "1, 4, 10"
                                          // * "array" - value is serialized php array
                                          // * "json" - value is json
-                                         "serialization" => "none|delimited|array|json",
+                                         "serialization" => "none|delimited|array|json", // implemented 'none' and 'coma-separated'
                                          // optional, default none
                                          // How to handle value
                                          // * "raw" - use value as is
                                          // * "reference" - value is reference to another entity (post\tag\attachment\etc)
                                          // * "url" - value is url to attachment (file\image)
-                                         "value"         => "raw|reference", // required
+                                         "value"         => "raw|reference", // required implemented ONLY 'reference'
                                          // Type of reference\url
                                          // post - any post-based type
                                          // media - image or attachment
                                          // taxonomy:<taxonomy_name> - e.g.: taxonomy:category
                                          // virtual:<typename> - tells that type if fully virtual
-                                         "type"          => "post|media|taxonomy:category|virtual:<typename>",
+                                         "type"          => "post( any post-based content-type)|media (file or image or audio or vide) |wp-type",
                                          // if action != skip ==> required
                     ],
                 ],
