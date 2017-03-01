@@ -12,17 +12,10 @@
  * License:           GPL-3.0+
  * Network:           true
  * License URI:       http://www.gnu.org/licenses/gpl-3.0.txt
- * ConnectorRequiredMin: 4.1
+ * ConnectorRequiredMin: 1.4.4
  * Version: 1.1
  */
 
-/**
- * Autoloader starts always
- */
-if (!class_exists('\Smartling\Bootloader')) {
-    require_once plugin_dir_path(__FILE__) . 'src/Bootloader.php';
-    \Smartling\Bootloader::initAutoloader(__FILE__);
-}
 
 /**
  * Always declaring custom types

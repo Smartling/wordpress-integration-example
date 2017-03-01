@@ -1,6 +1,6 @@
 <?php
 
-namespace Smartling\Extensions\Cron;
+namespace Smartling\Extension\Cron;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 

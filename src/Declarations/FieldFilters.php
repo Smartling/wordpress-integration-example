@@ -27,12 +27,27 @@ class FieldFilters
             [
                 'pattern' => 'phone',
                 'action'  => 'copy',
-            ],[
-                'pattern'       => 'post_parent',
+            ],*/
+            /*[
+                'pattern'       => 'related_post_id',
                 'action'        => 'localize',
                 'serialization' => 'none',
                 'value'         => 'reference',
                 'type'          => 'post',
+            ],
+            [
+                'pattern'       => 'category',
+                'action'        => 'localize',
+                'serialization' => 'none',
+                'value'         => 'reference',
+                'type'          => 'category',
+            ],*/
+            /*[
+                'pattern'       => '^include_categories$',
+                'action'        => 'localize',
+                'serialization' => 'coma-separated',
+                'value'         => 'reference',
+                'type'          => 'category',
             ],
             [
                 'pattern'       => '_thumbnail_id',

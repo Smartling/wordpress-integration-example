@@ -2,7 +2,7 @@
 
 namespace Smartling;
 
-use Smartling\Extensions\Cron\CronJobTuner;
+use Smartling\Extension\Cron\CronJobTuner;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -105,7 +105,7 @@ class Bootloader
         $requiredVersion = self::getPluginMeta($pluginFile, 'ConnectorRequiredMin');
         $realVersion = Bootstrap::$pluginVersion;
 
-        return version_compare($requiredVersion, $realVersion, '>=');
+        return version_compare($realVersion, $requiredVersion, '>=');
     }
 
     /**
@@ -118,7 +118,7 @@ class Bootloader
             if (false === self::checkConnectorVersion($pluginFile)) {
                 self::displayErrorMessage(
                     vsprintf(
-                        '<strong>%s</strong> extension plugin requires <strong>%s</strong> plugin version at least<strong>%s</strong>.',
+                        '<strong>%s</strong> extension plugin requires <strong>%s</strong> plugin version at least <strong>%s</strong>.',
                         [self::getPluginName($pluginFile), 'Smartling Connector',
                          self::getPluginMeta($pluginFile, 'ConnectorRequiredMin')]
                     )
@@ -170,13 +170,13 @@ class Bootloader
     private function tuneCronJobs()
     {
         /**
-         * An example for wpengine hosting
+         * An example for wp_engine hosting
          */
         (new CronJobTuner($this->getDi()))
-            ->setUploadJobTTL(60)
-            ->setSubmissionCollectorJobTTL(60)
-            ->setLastModifiedJobTTL(60)
-            ->setDownloadJobTTL(60)
+            ->setUploadJobTTL(5)
+            ->setSubmissionCollectorJobTTL(5)
+            ->setLastModifiedJobTTL(5)
+            ->setDownloadJobTTL(5)
             ->apply();
     }
 }
